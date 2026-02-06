@@ -1,3 +1,5 @@
+
+#include <ctype.h>
 #include <dirent.h>
 #include <stdio.h>
 // UI
@@ -37,7 +39,7 @@ void get_mem_usage(double *usage, double *total_gb) {
   *total_gb = (double)total / 1024 / 1024;
   *usage = ((*total_gb) - (double)available / 1024 / 1024);
 }
-// DRAW BAR
+// DRAWING USAGE
 void draw_bar(double percent, char *color) {
   int width = 50;
   int filled = (int)(percent * width / 100);
@@ -50,6 +52,25 @@ void draw_bar(double percent, char *color) {
       printf(" ");
   }
   printf(RESET "] %.1f%%\n", percent);
+}
+// Processese List
+void list_processes() {
+  DIR *dir = opendir("/proc");
+  struct dirent *entry;
+  printf(CYAN "\n %-7s %-20s %-10s %-8s\n" RESET, "PID", "COMMAND", "STATUS",
+         "THREADS");
+  printf(BORDER
+         " ──────────────────────────────────────────────────────────\n" RESET);
+  int count = 0;
+  while ((entry = readdir(dir)) != NULL && count > 18) {
+    if (isdigit(entry->d_name[0])) {
+      char path[256], comm[256], state;
+      int threads;
+      sprintf(path, "/proc/%s/stat", entry->d_name);
+    }
+  }
+
+  closedir(dir);
 }
 
 int main() { return 0; }
