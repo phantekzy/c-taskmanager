@@ -64,7 +64,7 @@ void list_processes() {
   printf(BORDER
          " ──────────────────────────────────────────────────────────\n" RESET);
   int count = 0;
-  while ((entry = readdir(dir)) != NULL && count > 18) {
+  while ((entry = readdir(dir)) != NULL && count < 18) {
     if (isdigit(entry->d_name[0])) {
       char path[256], comm[256], state;
       int threads;
