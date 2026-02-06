@@ -1,0 +1,9 @@
+# Ignore compiled binaries
+c-taskmanager
+learnC
+*.o
+*.out
+
+# Ignore temporary files
+*~
+.DS_Store
