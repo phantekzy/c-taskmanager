@@ -84,4 +84,12 @@ void list_processes() {
   closedir(dir);
 }
 
-int main() { return 0; }
+int main() {
+  double cpu, mem_u, mem_t;
+  while (1) {
+    get_cpu_usage(&cpu);
+    get_mem_usage(&mem_u, &mem_t);
+  }
+
+  return 0;
+}
