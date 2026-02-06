@@ -27,4 +27,15 @@ void get_cpu_usage(double *cpu_perc) {
   last_idle = idle;
 }
 
+// RAM
+void get_mem_usage(double *usage, double *total_gb) {
+  long total, available;
+  FILE *fp = fopen("/proc/meminfo", "r");
+  fscanf(fp, "MemTotal: %ld kB\nMemFree: %ld kB\nMemAvailable: %ld kB", &total,
+         &available, &available);
+  fclose(fp);
+  *total_gb = (double)total / 1024 / 1024;
+  *usage = ((*total_gb) - (double)available / 1024 / 1024);
+}
+
 int main() { return 0; }
