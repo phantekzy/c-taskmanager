@@ -1,9 +1,23 @@
-# Ignore compiled binaries
+# Compiled Binaries
+main
+memo
 c-taskmanager
 learnC
-*.o
 *.out
+a.out
 
-# Ignore temporary files
-*~
+# Object Files and Libraries
+*.o
+*.so
+*.a
+
+# Debugger Files
+*.dSYM/
+gmon.out
+
+# IDE and System Files
+.vscode/
+.idea/
 .DS_Store
+*~
+*.swp
