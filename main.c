@@ -2,6 +2,8 @@
 #include <ctype.h>
 #include <dirent.h>
 #include <stdio.h>
+#include <unistd.h>
+
 // UI
 #define BORDER "\033[38;5;244m"
 #define CYAN "\033[1;36m"
@@ -89,6 +91,23 @@ int main() {
   while (1) {
     get_cpu_usage(&cpu);
     get_mem_usage(&mem_u, &mem_t);
+    printf("\033[H\033[J"); // Clear Screen
+    printf(BORDER "┌" BOLD " SYSTEM TASK MANAGER " RESET BORDER
+                  "───────────────────────────────────┐\n" RESET);
+
+    printf("  CPU ");
+    draw_bar(cpu, (cpu > 75) ? RED : GREEN);
+    printf("  MEM ");
+    draw_bar((mem_u / mem_t) * 100, (mem_u / mem_t > 0.8) ? RED : CYAN);
+    printf("  Used: %.2f GB / Total: %.2f GB\n", mem_u, mem_t);
+
+    list_processes();
+
+    printf(
+        BORDER
+        "└──────────────────────────────────────────────────────────┘\n" RESET);
+    printf(" [CTRL+C] Exit | Sampling Rate: 1s\n");
+    sleep(1);
   }
 
   return 0;
