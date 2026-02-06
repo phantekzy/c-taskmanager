@@ -1,4 +1,4 @@
-
+// Headers
 #include <ctype.h>
 #include <dirent.h>
 #include <stdio.h>
@@ -14,6 +14,7 @@
 
 // Global snapshots
 long long last_total = 0, last_idle = 0;
+
 // CPU
 void get_cpu_usage(double *cpu_perc) {
   long long a, b, c, idle, e, f, g;
@@ -86,6 +87,7 @@ void list_processes() {
   closedir(dir);
 }
 
+// Main function
 int main() {
   double cpu, mem_u, mem_t;
   while (1) {
