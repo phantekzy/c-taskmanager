@@ -67,6 +67,17 @@ void list_processes() {
       char path[256], comm[256], state;
       int threads;
       sprintf(path, "/proc/%s/stat", entry->d_name);
+      FILE *f = fopen(path, "r");
+      if (f) {
+        fscanf(f,
+               "%*d (%[^)]) %c %*d %*d %*d %*d %*d %*u %*u %*u %*u %*u %*u %*u "
+               "%*d %*d %*d %*d %d",
+               comm, &state, &threads);
+        fclose(f);
+        printf(" %-7s %-20.20s %-10c %-8d\n", entry->d_name, comm, state,
+               threads);
+        count++;
+      }
     }
   }
 
