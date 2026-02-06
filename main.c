@@ -37,5 +37,19 @@ void get_mem_usage(double *usage, double *total_gb) {
   *total_gb = (double)total / 1024 / 1024;
   *usage = ((*total_gb) - (double)available / 1024 / 1024);
 }
+// DRAW BAR
+void draw_bar(double percent, char *color) {
+  int width = 50;
+  int filled = (int)(percent * width / 100);
+  printf("[");
+  printf("%s", color);
+  for (int i = 0; i < width; i++) {
+    if (i < filled)
+      printf("■");
+    else
+      printf(" ");
+  }
+  printf(RESET "] %.1f%%\n", percent);
+}
 
 int main() { return 0; }
